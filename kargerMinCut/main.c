@@ -18,10 +18,17 @@ int main(int argc, const char * argv[])
 {
     time_t t;
     srand((unsigned) time(&t));
+    time_t time1;
+    time_t time2;
+    time(&time1);
+
+    int times_17 = 0;
+    
     FILE *fp;
     int x[vertices][vertices]={0};
     int x_num[vertices] = {0};
-    if((fp=fopen("kargerMinCut.txt","r"))==NULL) /* 打开一个由argv[1]所指的文件*/
+    //if((fp=fopen("kargerMinCut.txt","r"))==NULL) /* 打开一个由argv[1]所指的文件*/
+    if((fp=fopen("SCC.txt","r"))==NULL) /* 打开一个由argv[1]所指的文件*/
     {
         printf("not open\n");
         exit(0);
@@ -135,13 +142,13 @@ int main(int argc, const char * argv[])
         if (matrix[0][1] < small_answer) {
             small_answer = matrix[0][1];
         }
-        printf("times %d :this: %d small answer is %d\n",times ,matrix[0][1],small_answer);
-        if (matrix[0][1] < 0) {
-            printf("wrong number\n");
-            break;
+        //printf("times %d :this: %d small answer is %d\n",times ,matrix[0][1],small_answer);
+        if (matrix[0][1] == 17) {
+            times_17 ++;
         }
     }
-    printf("final answer is %d\n" ,small_answer);
+    time(&time2);
+    printf("final answer is %d showed %d times\n  period time is %d secs\n" ,small_answer,times_17,(int)(time2-time1));
     return 0;
 }
 
